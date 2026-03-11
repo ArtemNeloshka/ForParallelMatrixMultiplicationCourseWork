@@ -1,0 +1,14 @@
+C:\KPI\6 semestr\TPO\Курсач\MatrixMultCurs\bin\Debug\net10.0\MatrixMultCurs.exe
+C:\KPI\6 semestr\TPO\Курсач\MatrixMultCurs\bin\Debug\net10.0\MatrixMultCurs.deps.json
+C:\KPI\6 semestr\TPO\Курсач\MatrixMultCurs\bin\Debug\net10.0\MatrixMultCurs.runtimeconfig.json
+C:\KPI\6 semestr\TPO\Курсач\MatrixMultCurs\bin\Debug\net10.0\MatrixMultCurs.dll
+C:\KPI\6 semestr\TPO\Курсач\MatrixMultCurs\bin\Debug\net10.0\MatrixMultCurs.pdb
+C:\KPI\6 semestr\TPO\Курсач\MatrixMultCurs\obj\Debug\net10.0\MatrixMultCurs.GeneratedMSBuildEditorConfig.editorconfig
+C:\KPI\6 semestr\TPO\Курсач\MatrixMultCurs\obj\Debug\net10.0\MatrixMultCurs.AssemblyInfoInputs.cache
+C:\KPI\6 semestr\TPO\Курсач\MatrixMultCurs\obj\Debug\net10.0\MatrixMultCurs.AssemblyInfo.cs
+C:\KPI\6 semestr\TPO\Курсач\MatrixMultCurs\obj\Debug\net10.0\MatrixMultCurs.csproj.CoreCompileInputs.cache
+C:\KPI\6 semestr\TPO\Курсач\MatrixMultCurs\obj\Debug\net10.0\MatrixMultCurs.dll
+C:\KPI\6 semestr\TPO\Курсач\MatrixMultCurs\obj\Debug\net10.0\refint\MatrixMultCurs.dll
+C:\KPI\6 semestr\TPO\Курсач\MatrixMultCurs\obj\Debug\net10.0\MatrixMultCurs.pdb
+C:\KPI\6 semestr\TPO\Курсач\MatrixMultCurs\obj\Debug\net10.0\MatrixMultCurs.genruntimeconfig.cache
+C:\KPI\6 semestr\TPO\Курсач\MatrixMultCurs\obj\Debug\net10.0\ref\MatrixMultCurs.dll
