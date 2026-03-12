@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MatrixMultCurs")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+694dbb6bade62d9bd64b819131aa448fef69b407")]
 [assembly: System.Reflection.AssemblyProductAttribute("MatrixMultCurs")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MatrixMultCurs")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

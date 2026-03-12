@@ -12,3 +12,4 @@ C:\KPI\6 semestr\TPO\Курсач\MatrixMultCurs\obj\Debug\net10.0\refint\Matrix
 C:\KPI\6 semestr\TPO\Курсач\MatrixMultCurs\obj\Debug\net10.0\MatrixMultCurs.pdb
 C:\KPI\6 semestr\TPO\Курсач\MatrixMultCurs\obj\Debug\net10.0\MatrixMultCurs.genruntimeconfig.cache
 C:\KPI\6 semestr\TPO\Курсач\MatrixMultCurs\obj\Debug\net10.0\ref\MatrixMultCurs.dll
+C:\KPI\6 semestr\TPO\Курсач\MatrixMultCurs\obj\Debug\net10.0\MatrixMultCurs.sourcelink.json
