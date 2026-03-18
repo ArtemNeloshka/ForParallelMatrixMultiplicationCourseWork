@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\KPI\\6 semestr\\TPO\\Курсач\\MatrixMultCurs\\MatrixMultCurs.csproj": {}
+    "C:\\KPI\\6 semestr\\TPO\\Курсач\\matrixmultcurs\\MatrixMultCurs.csproj": {}
   },
   "projects": {
-    "C:\\KPI\\6 semestr\\TPO\\Курсач\\MatrixMultCurs\\MatrixMultCurs.csproj": {
+    "C:\\KPI\\6 semestr\\TPO\\Курсач\\matrixmultcurs\\MatrixMultCurs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\KPI\\6 semestr\\TPO\\Курсач\\MatrixMultCurs\\MatrixMultCurs.csproj",
+        "projectUniqueName": "C:\\KPI\\6 semestr\\TPO\\Курсач\\matrixmultcurs\\MatrixMultCurs.csproj",
         "projectName": "MatrixMultCurs",
-        "projectPath": "C:\\KPI\\6 semestr\\TPO\\Курсач\\MatrixMultCurs\\MatrixMultCurs.csproj",
+        "projectPath": "C:\\KPI\\6 semestr\\TPO\\Курсач\\matrixmultcurs\\MatrixMultCurs.csproj",
         "packagesPath": "C:\\Users\\vital\\.nuget\\packages\\",
-        "outputPath": "C:\\KPI\\6 semestr\\TPO\\Курсач\\MatrixMultCurs\\obj\\",
+        "outputPath": "C:\\KPI\\6 semestr\\TPO\\Курсач\\matrixmultcurs\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vital\\AppData\\Roaming\\NuGet\\NuGet.Config"

@@ -1,5 +1,6 @@
+using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace FoxMatrixMultiplication
 {
@@ -7,52 +8,66 @@ namespace FoxMatrixMultiplication
     {
         public double[] Multiply(double[] A, double[] B, int n, int q)
         {
-            int paddedN = MatrixUtils.GetPaddedSize(n, q);
-            if (paddedN != n)
-            {
-                A = MatrixUtils.PadMatrix(A, n, paddedN);
-                B = MatrixUtils.PadMatrix(B, n, paddedN);
-            }
-            
-            double[] C = MultiplyPadded(A, B, paddedN, q);
-            return paddedN != n ? MatrixUtils.UnpadMatrix(C, paddedN, n) : C;
-        }
-
-        private static double[] MultiplyPadded(double[] A, double[] B, int n, int q)
-        {
-            int m = n / q;
+            int[] sizes = MatrixUtils.GetBlockSizes(n, q);
+            int[] offsets = MatrixUtils.GetBlockOffsets(sizes);
             double[] C = new double[n * n];
 
-            Parallel.For(0, q * q, idx =>
+            int totalBlocks = q * q;
+            int P = Math.Min(Environment.ProcessorCount, totalBlocks);
+            Barrier barrier = new Barrier(P);
+            Thread[] threads = new Thread[P];
+
+            for (int i = 0; i < P; i++)
             {
-                int i = idx / q;
-                int j = idx % q;
-                for (int step = 0; step < q; step++)
+                int blockStart = i * totalBlocks / P;
+                int blockEnd = (i + 1) * totalBlocks / P;
+
+                threads[i] = new Thread(() =>
                 {
-                    int k = (i + step) % q;
-                    MultiplyBlock(A, B, C, i, j, k, m, n);
-                }
-            });
+                    for (int step = 0; step < q; step++)
+                    {
+                        for (int idx = blockStart; idx < blockEnd; idx++)
+                        {
+                            int row = idx / q;
+                            int col = idx % q;
+                            int j = (row + step) % q;
+
+                            MultiplyBlock(A, B, C, n,
+                                offsets[row], sizes[row],
+                                offsets[col], sizes[col],
+                                offsets[j], sizes[j]);
+                        }
+
+                        barrier.SignalAndWait();
+                    }
+                });
+            }
+
+            foreach (var th in threads)
+                th.Start();
+            
+            foreach (var th in threads)
+                th.Join();
 
             return C;
         }
 
         private static void MultiplyBlock(
-            double[] A, double[] B, double[] C,
-            int rowBlock, int colBlock, int kBlock, int m, int n)
+            double[] A, double[] B, double[] C, int n,
+            int rowOff, int rowSize,
+            int colOff, int colSize,
+            int kOff, int kSize)
         {
-            for (int i = 0; i < m; i++)
+            for (int i = 0; i < rowSize; i++)
             {
-                int row = rowBlock * m + i;
-                for (int j = 0; j < m; j++)
+                int row = rowOff + i;
+                for (int j = 0; j < colSize; j++)
                 {
-                    int col = colBlock * m + j;
+                    int col = colOff + j;
                     double sum = 0.0;
-                    for (int k = 0; k < m; k++)
-                    {
-                        int kIdx = kBlock * m + k;
-                        sum += A[row * n + kIdx] * B[kIdx * n + col];
-                    }
+                    
+                    for (int k = 0; k < kSize; k++)
+                        sum += A[row * n + (kOff + k)] * B[(kOff + k) * n + col];
                     
                     C[row * n + col] += sum;
                 }
@@ -63,12 +78,16 @@ namespace FoxMatrixMultiplication
         {
             for (int i = 0; i < 3; i++)
                 Multiply(A, B, n, q);
-
+            
             long total = 0;
-            var sw = new Stopwatch();
+            Stopwatch sw = new Stopwatch();
+            
             for (int i = 0; i < runs; i++)
             {
-                sw.Restart(); Multiply(A, B, n, q); sw.Stop();
+                sw.Restart(); 
+                Multiply(A, B, n, q); 
+                sw.Stop();
+                
                 total += sw.ElapsedTicks;
             }
             

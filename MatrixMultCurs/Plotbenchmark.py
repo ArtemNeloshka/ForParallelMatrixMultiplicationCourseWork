@@ -1,6 +1,8 @@
 import sys
 import csv
 import matplotlib.pyplot as plt
+import matplotlib.cm as cm
+import numpy as np
 
 
 def read_results(path):
@@ -16,6 +18,12 @@ def read_results(path):
     return sizes, series
 
 
+def make_styles(n):
+    colors = cm.tab10(np.linspace(0, 0.9, n))
+    markers = ['o', 's', '^', 'D', 'v', 'P', 'X']
+    return colors, markers
+
+
 def theoretical_curve(sizes, reference_times):
     n0, t0 = sizes[-1], reference_times[-1]
     scale = t0 / (n0 ** 3)
@@ -28,12 +36,11 @@ def plot_benchmark(csv_path, output_path):
     title = ("Швидкодія паралельного алгоритму Фокса" if is_par
              else "Швидкодія послідовного алгоритму Фокса")
 
-    colors = ['steelblue', 'seagreen', 'darkorange', 'mediumpurple']
-    markers = ['o', 's', '^', 'D']
+    colors, markers = make_styles(len(series))
 
     fig, ax = plt.subplots(figsize=(9, 5))
     for idx, (label, times) in enumerate(series.items()):
-        ax.plot(sizes, times, marker=markers[idx % 4], color=colors[idx % 4],
+        ax.plot(sizes, times, marker=markers[idx % len(markers)], color=colors[idx],
                 linewidth=2, markersize=7, label=label)
 
     theory = theoretical_curve(sizes, next(iter(series.values())))
@@ -53,13 +60,12 @@ def plot_speedup(seq_path, par_path, output_path):
     sizes, seq = read_results(seq_path)
     _, par = read_results(par_path)
 
-    colors = ['steelblue', 'seagreen', 'darkorange', 'mediumpurple']
-    markers = ['o', 's', '^', 'D']
+    colors, markers = make_styles(len(seq))
 
     fig, ax = plt.subplots(figsize=(9, 5))
     for idx, q in enumerate(seq):
         speedups = [seq[q][i] / par[q][i] for i in range(len(sizes))]
-        ax.plot(sizes, speedups, marker=markers[idx % 4], color=colors[idx % 4],
+        ax.plot(sizes, speedups, marker=markers[idx % len(markers)], color=colors[idx],
                 linewidth=2, markersize=7, label=q)
 
     ax.axhline(y=1.0, color='gray', linestyle=':', linewidth=1, label='Без прискорення')
@@ -77,7 +83,7 @@ def main():
     if len(sys.argv) > 1 and sys.argv[1] == '--speedup':
         plot_speedup(sys.argv[2], sys.argv[3], sys.argv[4])
     else:
-        csv_path    = sys.argv[1] if len(sys.argv) > 1 else "results.csv"
+        csv_path = sys.argv[1] if len(sys.argv) > 1 else "results.csv"
         output_path = sys.argv[2] if len(sys.argv) > 2 else "benchmark.png"
         plot_benchmark(csv_path, output_path)
 
